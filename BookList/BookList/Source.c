@@ -58,7 +58,7 @@ void showListBook(BookList* list) {
 		);
 	}
 }
-//delete book from book list by the author
+//delete book from book list after title
 void deleteBookByTitle(BookList* list, char* title) {
 	int found = 0;
 	for (int i = 0; i < list->size; i++) {
