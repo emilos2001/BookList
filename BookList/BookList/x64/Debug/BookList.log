@@ -1,0 +1,5 @@
+﻿  Source.c
+C:\Users\Igor\source\repos\BookList\BookList\Source.c(61,18): warning C4133: 'function': incompatible types - from 'Book [1000]' to 'const char *'
+C:\Users\Igor\source\repos\BookList\BookList\Source.c(72,17): warning C4098: 'deleteBookByTitle': 'void' function returning a value
+C:\Users\Igor\source\repos\BookList\BookList\Source.c(33): warning C4716: 'isEmpty': must return a value
+  BookList.vcxproj -> C:\Users\Igor\source\repos\BookList\x64\Debug\BookList.exe
