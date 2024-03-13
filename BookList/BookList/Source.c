@@ -6,9 +6,6 @@
 
 #define MAX_SIZE 1000 
 #define SUCCESS 0
-#define POSITION_INIT 1
-#define INVALID_POSITION 2
-#define POSITION_EMPTY 3
 #define LIST_FULL 4
 
 typedef struct {
@@ -93,13 +90,30 @@ void showAllBooksByAuthor(BookList* list, char* author) {
 		printf("The author %s has no found", author);
 	}
 }
+
+//show the books released between year1 and year2
+void booksReleaseBetweenYears(BookList* list, int year1, int year2) {
+	int found = 0;
+	for (int i = 0; i < list->size; i++) {
+		int releaseYear = list->book[i].releaseYear;
+		if (releaseYear >= year1 && releaseYear <= year2) {
+			found = 1;
+			printf("The book released between years %d and %d: %s by %s\n",
+				year1, year2, list->book[i].title, list->book[i].author);
+		}
+	}
+	if (found == 0) {
+		printf("No books released between %d and %d\n", year1, year2);
+	}
+}
+
 //update the year of release
 void updateYearRelease(BookList* list, const char* title, int oldYear, int newYear) {
 	int found = 0;
 	for (int i = 0; i < list->size; i++) {
 		if (strcmp(list->book[i].title, title) == 0) {
-			found = 1;
-			if (list->book[i].releaseYear == oldYear) {
+			if (list->book[i].releaseYear == oldYear) {	
+				found = 1;
 				list->book[i].releaseYear = newYear;
 				printf("At %s, the year of release was changed from: %d to: %d\n",
 					title, oldYear, newYear);
@@ -107,8 +121,8 @@ void updateYearRelease(BookList* list, const char* title, int oldYear, int newYe
 		}
 	}
 
-	if (!found) {
-		printf("Book with title '%s' not found in the list.\n", title);
+	if (found == 0) {
+		printf("Book with title '%s' and year '%d' not found in the list.\n", title, oldYear);
 	}
 }
 
@@ -140,7 +154,10 @@ int main() {
 	insertBook(&list, thirdBook);
 	insertBook(&list, fourthBook);
 	insertBook(&list, fifthBook);
-	updateYearRelease(&list, "Red Mars", 1992, 2003);
 	showListBook(&list);
+        printf("\n");
+        updateYearRelease(&list, "Red Mars", 1992, 2001); 
+        printf("\n");
+        booksReleaseBetweenYears(&list, 1980, 1990);
 	return 0;
 }
